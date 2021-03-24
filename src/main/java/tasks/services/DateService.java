@@ -18,6 +18,7 @@ public class DateService {
     public DateService(TasksService service){
         this.service=service;
     }
+
     public static LocalDate getLocalDateValueFromDate(Date date){//for setting to DatePicker - requires LocalDate
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -37,7 +38,8 @@ public class DateService {
         calendar.set(Calendar.MINUTE, minute);
         return calendar.getTime();
     }
-        public String getTimeOfTheDayFromDate(Date date){//to set in detached time field
+
+    public String getTimeOfTheDayFromDate(Date date){//to set in detached time field
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
         int hours = calendar.get(Calendar.HOUR_OF_DAY);
@@ -45,6 +47,4 @@ public class DateService {
 
         return service.formTimeUnit(hours) + ":" + service.formTimeUnit(minutes);
     }
-
-
 }

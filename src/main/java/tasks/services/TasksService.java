@@ -38,7 +38,7 @@ public class TasksService {
     }
 
 
-    public int parseFromStringToSeconds(String stringTime){//hh:MM
+    public int parseFromStringToSeconds(String stringTime) { //hh:MM
         String[] units = stringTime.split(":");
         int hours = Integer.parseInt(units[0]);
         int minutes = Integer.parseInt(units[1]);
