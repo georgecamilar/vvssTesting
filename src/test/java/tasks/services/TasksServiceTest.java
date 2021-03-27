@@ -64,7 +64,6 @@ class TasksServiceTest {
 
     @Tag("ECP")
     @RepeatedTest(5)
-    @Test
     void addECPNonValid5(){
         try {
             tasksService.parseFromStringToSeconds("10:4b");
@@ -123,7 +122,6 @@ class TasksServiceTest {
 
     @Tag("BVA")
     @RepeatedTest(10)
-    @Test
     void addBVANonValid4() {
         try {
             tasksService.parseFromStringToSeconds("23:60");
