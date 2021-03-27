@@ -1,22 +1,22 @@
 package tasks.services;
 
 import org.junit.jupiter.api.*;
+import tasks.model.ArrayTaskList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TasksServiceTest {
 
-    private String stringTime;
     private TasksService tasksService;
 
     @BeforeEach
     void setUp() {
-        tasksService = null;
-        stringTime = "17:23";
+        ArrayTaskList tasks = new ArrayTaskList();
+        tasksService = new TasksService(tasks);
     }
 
     @Tag("ECP")
-    @Disabled
+    //@Disabled
     @Test
     void addECPValid1() {
         try {
@@ -89,7 +89,7 @@ class TasksServiceTest {
     @Test
     void addBVAValid1() {
         try {
-            tasksService.parseFromStringToSeconds("00:00");
+            tasksService.parseFromStringToSeconds("00:01");
             assert(true);
         } catch (Exception e) {
             assert(false);
@@ -98,7 +98,7 @@ class TasksServiceTest {
 
     @Tag("BVA")
     @Timeout(1000)
-    @Disabled
+    //@Disabled
     @Test
     void addBVAValid2() {
         try {

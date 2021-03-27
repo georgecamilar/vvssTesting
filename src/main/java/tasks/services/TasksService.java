@@ -37,7 +37,6 @@ public class TasksService {
         return sb.toString();
     }
 
-
     public int parseFromStringToSeconds(String stringTime) throws Exception { //hh:MM
         String[] units = stringTime.split(":");
 
@@ -57,10 +56,9 @@ public class TasksService {
             return (hours * DateService.MINUTES_IN_HOUR + minutes) * DateService.SECONDS_IN_MINUTE;
         }
         catch (NumberFormatException e){
-            e.printStackTrace();
+            throw new Exception("Minute/ore invalide !");
         }
 
-        return -1;
     }
 
     public Iterable<Task> filterTasks(Date start, Date end){

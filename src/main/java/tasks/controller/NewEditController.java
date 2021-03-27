@@ -191,12 +191,14 @@ public class NewEditController {
             catch (IOException ioe){
                 log.error("error loading field-validator.fxml");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return result;
     }
 
 
-    private Task makeTask(){
+    private Task makeTask() throws Exception {
         Task result;
         String newTitle = fieldTitle.getText();
         Date startDateWithNoTime = dateService.getDateValueFromLocalDate(datePickerStart.getValue());//ONLY date!!without time
