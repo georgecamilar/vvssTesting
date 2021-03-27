@@ -113,7 +113,7 @@ class TasksServiceTest {
     @Test
     void addBVANonValid3() {
         try {
-            tasksService.parseFromStringToSeconds("-1:59");
+            tasksService.parseFromStringToSeconds("00:00");
             assert(false);
         } catch (Exception e) {
             assert(true);
