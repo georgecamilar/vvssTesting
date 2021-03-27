@@ -38,11 +38,29 @@ public class TasksService {
     }
 
 
-    public int parseFromStringToSeconds(String stringTime) { //hh:MM
+    public int parseFromStringToSeconds(String stringTime) throws Exception { //hh:MM
         String[] units = stringTime.split(":");
-        int hours = Integer.parseInt(units[0]);
-        int minutes = Integer.parseInt(units[1]);
-        return (hours * DateService.MINUTES_IN_HOUR + minutes) * DateService.SECONDS_IN_MINUTE;
+
+        if (stringTime.length() != 5)
+            throw new Exception("Format invalid !");
+
+        try {
+            int hours = Integer.parseInt(units[0]);
+            int minutes = Integer.parseInt(units[1]);
+
+            if (hours < 0)
+                throw new Exception("Ora invalida !");
+
+            if (minutes > 60 || minutes < 0)
+                throw new Exception("Minute invalide !");
+
+            return (hours * DateService.MINUTES_IN_HOUR + minutes) * DateService.SECONDS_IN_MINUTE;
+        }
+        catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 
     public Iterable<Task> filterTasks(Date start, Date end){

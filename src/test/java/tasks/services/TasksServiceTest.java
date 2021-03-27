@@ -1,8 +1,6 @@
 package tasks.services;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,10 +15,33 @@ class TasksServiceTest {
         stringTime = "17:23";
     }
 
-    // Teste pentru parametrul time
-    @DisplayName("Test pentru metoda parseFromStringToSeconds")
+    @Tag("ECP")
+    @Disabled
     @Test
-    void addECPNonValid1() {
+    void addECPValid1() {
+        try {
+            tasksService.parseFromStringToSeconds("11:24");
+            assert(true);
+        } catch (Exception e) {
+            assert(false);
+        }
+    }
+
+    @Tag("ECP")
+    @RepeatedTest(3)
+    void addECPValid2() {
+        try {
+            tasksService.parseFromStringToSeconds("01:59");
+            assert(true);
+        } catch (Exception e) {
+            assert(false);
+        }
+    }
+
+    @Tag("ECP")
+    @DisplayName("Test ECP pentru metoda parseFromStringToSeconds")
+    @Test
+    void addECPNonValid3() {
         try {
             tasksService.parseFromStringToSeconds("12:34:56");
             assert(false);
@@ -29,15 +50,75 @@ class TasksServiceTest {
         }
     }
 
+    @Tag("ECP")
+    @Timeout(1000)
     @Test
-    void parseFromStringToSeconds() {
-        assert tasksService.parseFromStringToSeconds(stringTime) == 62580;
-        stringTime = "a3:40";
+    void addECPNonValid4(){
         try {
-            tasksService.parseFromStringToSeconds(stringTime);
+            tasksService.parseFromStringToSeconds("0907");
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
         }
-        catch (NumberFormatException e){
-            e.printStackTrace();
+    }
+
+    @Tag("ECP")
+    @RepeatedTest(5)
+    @Test
+    void addECPNonValid5(){
+        try {
+            tasksService.parseFromStringToSeconds("10:4b");
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Tag("BVA")
+    @Test
+    void addBVAValid1() {
+        try {
+            tasksService.parseFromStringToSeconds("00:00");
+            assert(true);
+        } catch (Exception e) {
+            assert(false);
+        }
+    }
+
+    @Tag("BVA")
+    @Timeout(1000)
+    @Disabled
+    @Test
+    void addBVAValid2() {
+        try {
+            tasksService.parseFromStringToSeconds("23:59");
+            assert(true);
+        } catch (Exception e) {
+            assert(false);
+        }
+    }
+
+    @Tag("BVA")
+    @DisplayName("Test BVA pentru metoda parseFromStringToSeconds")
+    @Test
+    void addBVANonValid3() {
+        try {
+            tasksService.parseFromStringToSeconds("30:00");
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Tag("BVA")
+    @RepeatedTest(10)
+    @Test
+    void addBVANonValid4() {
+        try {
+            tasksService.parseFromStringToSeconds("23:60");
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
         }
     }
 }
