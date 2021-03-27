@@ -31,7 +31,7 @@ class TasksServiceTest {
     @RepeatedTest(3)
     void addECPValid2() {
         try {
-            tasksService.parseFromStringToSeconds("01:59");
+            tasksService.parseFromStringToSeconds("00:59");
             assert(true);
         } catch (Exception e) {
             assert(false);
@@ -55,7 +55,7 @@ class TasksServiceTest {
     @Test
     void addECPNonValid4(){
         try {
-            tasksService.parseFromStringToSeconds("0907");
+            tasksService.parseFromStringToSeconds("-9:34");
             assert(false);
         } catch (Exception e) {
             assert(true);
@@ -68,6 +68,17 @@ class TasksServiceTest {
     void addECPNonValid5(){
         try {
             tasksService.parseFromStringToSeconds("10:4b");
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Tag("ECP")
+    @Test
+    void addECPNonValid6(){
+        try {
+            tasksService.parseFromStringToSeconds("10:61");
             assert(false);
         } catch (Exception e) {
             assert(true);
@@ -103,7 +114,7 @@ class TasksServiceTest {
     @Test
     void addBVANonValid3() {
         try {
-            tasksService.parseFromStringToSeconds("30:00");
+            tasksService.parseFromStringToSeconds("-1:59");
             assert(false);
         } catch (Exception e) {
             assert(true);
