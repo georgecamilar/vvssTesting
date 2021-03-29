@@ -53,6 +53,9 @@ public class TasksService {
             if (minutes >= 60 || minutes < 0)
                 throw new Exception("Minute invalide !");
 
+            if (hours == 0 && minutes == 0)
+                throw new Exception("Ore si minute invalide !");
+
             return (hours * DateService.MINUTES_IN_HOUR + minutes) * DateService.SECONDS_IN_MINUTE;
         }
         catch (NumberFormatException e){
